@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.NotificationListFragment">
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:background="@color/black"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Notifications"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_16" />
+
+
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/sp_26"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:src="@drawable/ic_baseline_delete_24" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/notificationRcy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_weight="1"
+            tools:listitem="@layout/notification_layout" />
+
+
+    </LinearLayout>
+
+</layout>

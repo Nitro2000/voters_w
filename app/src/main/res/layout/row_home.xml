@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+    <import type="android.view.View" />
+    <variable
+        name="item"
+        type="com.voterswik.model.Data" />
+    <variable
+        name="itemClickListener"
+        type="com.voterswik.utils.OnItemClickListener" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:id="@+id/parentRow"
+        android:onClick="@{(view) -> itemClickListener.onItemClick(view,item)}"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+
+        <com.google.android.exoplayer2.ui.StyledPlayerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/playerView"
+            app:use_controller="false"
+            app:resize_mode="fixed_height"
+            app:show_buffering="when_playing"
+            app:controller_layout_id="@layout/custom_player_controller"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.888">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textVideoTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="9dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="15"
+                    android:text="Sonal"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+<!--                android:text="@{item.name}"-->
+
+                <TextView
+                    android:id="@+id/textVideoDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:visibility="gone"
+                    android:shadowRadius="15"
+                    android:text="@string/app_name"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:onClick="@{(view) -> itemClickListener.onItemClick(view,item)}"
+                    android:id="@+id/ivFavorites"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="18dp"
+                    android:padding="2dp"
+                    android:src="@{Integer.valueOf(item.islike)==1? @drawable/like_2  :@drawable/line_like}" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="18dp"
+                    android:padding="2dp"
+                    android:text="@{String.valueOf(item.likes)}"
+                    android:id="@+id/tvFavorite"
+                    android:textColor="@color/white"/>
+
+                <ImageView
+                    android:onClick="@{(view) -> itemClickListener.onItemClick(view,item)}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="18dp"
+                    android:padding="6dp"
+                    android:id="@+id/ivVote"
+                    android:src="@{Integer.valueOf(item.uservotecount)==1? @drawable/vote_2  :@drawable/vote}" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="18dp"
+                    android:padding="2dp"
+                    android:text="@{String.valueOf(item.allvotescount)}"
+                    android:id="@+id/tvVote"
+                    android:textColor="@color/white"/>
+
+                <ImageView
+                    android:onClick="@{(view) -> itemClickListener.onItemClick(view,item)}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/ivShare"
+                    android:layout_marginEnd="18dp"
+                    android:padding="6dp"
+                    android:src="@drawable/share" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="18dp"
+                    android:padding="2dp"
+                    android:text="213"
+                    android:visibility="gone"
+                    android:id="@+id/tvShare"
+                    android:textColor="@color/white"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="18dp"
+                    android:padding="2dp"
+                    android:id="@+id/ivView"
+                    android:src="@drawable/view" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="18dp"
+                    android:padding="2dp"
+                    android:text="@{String.valueOf(item.allpostscount)}"
+                    android:id="@+id/tvView"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

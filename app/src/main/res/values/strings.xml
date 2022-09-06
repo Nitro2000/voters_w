@@ -1,0 +1,82 @@
+<resources>
+    <string name="app_name">Voters Wik</string>
+    <string name="enter_your_information_below">Enter Your Informations Below</string>
+    <string name="or_login_with_a_social_media_account">Or Login With a Social Media account.</string>
+    <string name="name">Name</string>
+    <string name="email_id">E-mail id</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="or">Or</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+    <string name="login">Login</string>
+    <string name="login_"><u>Login</u></string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="i_donot_have_an_account">I Don\'t have an account</string>
+    <string name="signup_"><u>SignUp</u></string>
+    <string name="i_already_have_an_account">I already have an account</string>
+    <string name="to_recover_your_account">To Recover Your Account</string>
+    <string name="email_id_or_mobile_number">E-mail id or Mobile Number</string>
+    <string name="next">Next</string>
+    <string name="cancel"><u>Cancel</u></string>
+    <string name="otp">OTP</string>
+    <string name="enter_your_otp_below">Enter Your OTP Below</string>
+    <string name="to_verify_your_account">To Verify Your Account</string>
+    <string name="enter_otp">Enter OTP</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="done">Done</string>
+    <string name="create_your_new_strong_password_below">Create your new strong password below</string>
+    <string name="back">Back</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_videaos">My videos</string>
+    <string name="chat">Chat</string>
+    <string name="notifications">Notifications</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="please_enter_name">Please enter name</string>
+    <string name="please_enter_email_address">Please enter email address</string>
+    <string name="please_enter_valid_email_id">Please enter valid email id</string>
+    <string name="please_enter_bio">Please enter bio</string>
+    <string name="please_enter_gender">Please enter gender</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="allow_comments">Allow Comments</string>
+    <string name="post">Post</string>
+    <string name="delete_post">Delete Post</string>
+    <string name="one_to_one">One-to-One</string>
+    <string name="conference_call">Conference Call</string>
+    <string name="write_description">Write Description…</string>
+    <string name="edit_name">Edit Name</string>
+    <string name="user_name">User Name</string>
+    <string name="save">Save</string>
+    <string name="max_50_words">max 50 Words</string>
+    <string name="send">Send</string>
+    <string name="pressbackagain">Press back again</string>
+
+
+    <string name="picture">Picture</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+
+    <string name="permission_request">This sample needs permission for camera and audio recording.</string>
+    <string name="message_need_permission">Need Permission</string>
+    <string name="message_permission">Permission</string>
+    <string name="title_go_to_setting">Go to setting</string>
+    <string name="play_video">Play Video</string>
+    <string name="image">image</string>
+    <string name="resend_otp">Resend OTP?</string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:timer="http://schemas.android.com/tools">
+
+        <com.voterswik.utils.AutoFitTextureView
+            android:id="@+id/texture"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_20dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivGallery"
+                android:layout_width="@dimen/_50dp"
+                android:layout_height="@dimen/_50dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/circle_bg"
+                android:backgroundTint="@color/white"
+                android:padding="@dimen/_10dp"
+                android:tint="@color/black"
+                android:src="@drawable/image_gallery_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <RelativeLayout
+                android:layout_centerHorizontal="true"
+                android:id="@+id/control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:layout_constraintStart_toEndOf="@id/ivGallery"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivEmoji"
+                android:background="@android:color/transparent">
+
+                <ImageView
+                    android:id="@+id/picture"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/circle_white_bg" />
+
+                <io.github.krtkush.lineartimer.LinearTimerView
+                    android:id="@+id/linearTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    timer:initialColor="@color/white"
+                    timer:progressColor="@color/red"
+                    timer:radius="18dp"
+                    android:visibility="gone"
+                    timer:startingPoint="270"
+                    timer:strokeWidth="2" />
+            </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivEmoji"
+                android:layout_width="@dimen/_50dp"
+                android:layout_height="@dimen/_50dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/circle_bg"
+                android:backgroundTint="@color/white"
+                android:padding="@dimen/_5dp"
+                android:src="@drawable/emoji"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCross"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/_10dp"
+            android:src="@drawable/close"
+            android:tint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_25dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/edit_box_white_bg"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/camera_rotate"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:tint="@color/black"
+                android:src="@drawable/refersh_white" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/camera_flash"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:tint="@color/black"
+                android:src="@drawable/ic_flash_on" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivMusic"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:tint="@color/black"
+                android:src="@drawable/music_white" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivFocus"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:tint="@color/black"
+                android:src="@drawable/focus_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivMusic" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivStopWatch"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:tint="@color/black"
+                android:src="@drawable/stop_watch_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivFocus" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_capture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:contentDescription="@string/image" />
+    </FrameLayout>
+</layout>
+
+
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:timer="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <com.voterswik.utils.AutoFitTextureView
+        android:id="@+id/texture"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        />
+
+
+   &lt;!&ndash; <ImageView
+        android:id="@+id/camera_rotate"
+        android:src="@drawable/ic_rotate_camera"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />&ndash;&gt;
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/_25dp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/edit_box_white_bg"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/camera_rotate"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_margin="@dimen/_5dp"
+            android:src="@drawable/refersh" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/camera_flash"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_margin="@dimen/_5dp"
+            android:src="@drawable/flash" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMusic"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_margin="@dimen/_5dp"
+            android:src="@drawable/music" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivFocus"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_margin="@dimen/_5dp"
+            android:src="@drawable/focus"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivStopWatch"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_margin="@dimen/_5dp"
+            android:src="@drawable/stop_watch"
+             />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/time"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+   <ImageView
+        android:id="@+id/camera_flash"
+        android:layout_below="@id/camera_rotate"
+        android:src="@drawable/ic_flash_on"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:background="@android:color/transparent">
+
+        <ImageView android:id="@+id/picture"
+            android:layout_gravity="center"
+            android:src="@drawable/circle_bg"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="80dp" />
+
+        <io.github.krtkush.lineartimer.LinearTimerView
+            android:id="@+id/linearTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            timer:radius="18dp"
+            timer:strokeWidth="2dp"
+            timer:startingPoint="270"
+            timer:initialColor="@color/white"
+            timer:progressColor="@color/red"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</FrameLayout>-->

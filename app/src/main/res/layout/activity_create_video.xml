@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCross"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/_10dp"
+            android:src="@drawable/close"
+            android:tint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_25dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/edit_box_white_bg"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivRefresh"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:src="@drawable/refersh" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivFlash"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:src="@drawable/flash" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivMusic"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:src="@drawable/music" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivFocus"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:src="@drawable/focus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivMusic" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivStopWatch"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_margin="@dimen/_5dp"
+                android:src="@drawable/stop_watch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivFocus" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_capture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <!--<androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/camera_capture_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/circle_white_bg"
+            android:elevation="2dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_20dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivGallery"
+                android:layout_width="@dimen/_50dp"
+                android:layout_height="@dimen/_50dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/circle_bg"
+                android:backgroundTint="@color/white"
+                android:padding="@dimen/_10dp"
+                android:src="@drawable/image_gallery"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/camera_capture_button"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/circle_white_bg"
+                android:elevation="2dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivEmoji"
+                android:layout_width="@dimen/_50dp"
+                android:layout_height="@dimen/_50dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/circle_bg"
+                android:backgroundTint="@color/white"
+                android:padding="@dimen/_5dp"
+                android:src="@drawable/emoji"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </FrameLayout>
+    <!-- <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:app="http://schemas.android.com/apk/res-auto"
+         xmlns:tools="http://schemas.android.com/tools"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:background="@color/transparent"
+         android:layout_marginBottom="@dimen/_60dp"
+         tools:context=".ui.CreateVideoActivity">
+
+
+
+         <androidx.appcompat.widget.AppCompatImageView
+             android:id="@+id/iv_back"
+             android:layout_width="@dimen/_30dp"
+             android:layout_height="@dimen/_30dp"
+             android:layout_centerVertical="true"
+             android:layout_marginStart="@dimen/_10dp"
+             android:layout_marginEnd="@dimen/_10dp"
+             android:padding="@dimen/_8dp"
+             android:layout_margin="@dimen/_8dp"
+             android:backgroundTint="@color/white"
+             android:background="@drawable/circle_bg"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             android:src="@drawable/back" />
+ -->
+
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+</layout>

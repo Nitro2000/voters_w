@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.maxtra.galleriesprett.ui.register.RegisterViewModel" />
+    </data>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.LoginActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:id="@+id/layout_top"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center_vertical">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="@dimen/_20dp"
+                    android:layout_height="@dimen/_20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    android:src="@drawable/back" />
+
+               <!-- <TextView
+                    android:id="@+id/tvName0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/iv_back"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="Add Post"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16dp" />-->
+
+
+            </RelativeLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            android:orientation="vertical"
+            >
+
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_margin="@dimen/_10dp"
+                android:orientation="horizontal">
+
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="@dimen/_100dp"
+                    android:layout_height="@dimen/_150dp"
+                    android:background="@drawable/border_grey">
+
+                    <com.google.android.exoplayer2.ui.PlayerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:resize_mode="fill"
+                        app:use_controller="false"
+                        android:id="@+id/playerView"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_150dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:background="@drawable/border_grey">
+
+                    <EditText
+                        android:id="@+id/edtBio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_box_fill"
+                        android:gravity="top"
+                        android:textColor="@color/white"
+                        android:padding="@dimen/_10dp"
+                        android:inputType="text"
+                        android:hint="@string/write_description"
+                        android:maxLines="4"
+                        android:textColorHint="@color/grey"
+                        android:lines="4"
+                        android:imeOptions="actionNext"
+                        app:hintAnimationEnabled="false"
+                        app:hintEnabled="false" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_lite"
+                />
+            <TextView
+                android:id="@+id/tvTagPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_margin="@dimen/_8dp"
+                android:text="Add Hashtags #abc"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_lite"
+                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvAddLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8dp"
+                    android:text="@string/allow_comments"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="@dimen/_14sp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btnConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAddLocation">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDeletePost"
+                android:layout_width="@dimen/dp_170"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/dp_16"
+                android:text="@string/delete_post"
+                android:theme="@style/MyMaterialTheme"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                android:background="@drawable/btn_bg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPost"
+                android:layout_width="@dimen/dp_170"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/dp_16"
+                android:text="@string/post"
+                android:textAllCaps="false"
+                android:theme="@style/MyMaterialTheme"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_20"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

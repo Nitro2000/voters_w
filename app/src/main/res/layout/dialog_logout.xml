@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_8">
+            <LinearLayout
+                android:layout_margin="@dimen/_10dp"
+                android:background="@drawable/back_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/logout"
+                    android:layout_width="@dimen/_75dp"
+                    android:layout_height="@dimen/_75dp"
+                    android:scaleType="fitCenter"
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:background="@color/transparent" />
+
+
+
+               <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:textColor="@color/black"
+                    android:text="Are you sure?"
+                    android:textSize="@dimen/dp_18"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_marginStart="@dimen/_30dp"
+                        android:layout_marginEnd="@dimen/_30dp"
+                        android:id="@+id/btnno"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40dp"
+                        android:minHeight="@dimen/dp_40"
+                        android:minWidth="@dimen/dp_120"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:textColor="@color/green"
+                        android:textSize="@dimen/_14dp"
+                        android:textAllCaps="false"
+                        android:background="@drawable/rounded_btn_yes"
+                        android:text="Cancel" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_marginStart="@dimen/_30dp"
+                        android:layout_marginEnd="@dimen/_30dp"
+                        android:id="@+id/btnLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40dp"
+                        android:minHeight="@dimen/dp_40"
+                        android:minWidth="@dimen/dp_120"
+                        android:layout_marginTop="@dimen/_20dp"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sp"
+                        android:textAllCaps="false"
+                        android:background="@drawable/rounded_btn"
+                        android:text="Yes, Sign me out" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
