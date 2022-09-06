@@ -199,27 +199,24 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
             R.id.ivVote -> {
                 var voteStatus = ""
 
-                Handler(Looper.getMainLooper()).postDelayed({
-                    val index = videos.indexOf(data)
-                    if (data.uservotecount == 1) {
+                val index = videos.indexOf(data)
+                if (data.uservotecount == 1) {
+                    voteStatus = "0"
+                    data.uservotecount = 0
 
-                        voteStatus = "0"
-                        data.uservotecount = 0
-                        videos[index].allvotescount = videos[index].allvotescount!!
-                    } else if (data.uservotecount == 1 || data.uservotecount == 0) {
+                } else if (data.uservotecount == 0) {
 
-                        voteStatus = "1"
-                        data.uservotecount = 1
-                        videos[index].allvotescount = videos[index].allvotescount!! + 1
-                    }
-                    viewModel.voteApi(
-                        "Bearer " + userPref.getToken().toString(),
-                        data.id.toString(), voteStatus
-                    )
-                    videos.removeAt(index)
-                    videos.add(index, data)
-                    videosAdapter.notifyItemChanged(index)
-                }, 5000)
+                    voteStatus = "1"
+                    data.uservotecount = 1
+                    videos[index].allvotescount = videos[index].allvotescount!! + 1
+                }
+                viewModel.voteApi(
+                    "Bearer " + userPref.getToken().toString(),
+                    data.id.toString(), voteStatus
+                )
+                videos.removeAt(index)
+                videos.add(index, data)
+                videosAdapter.notifyItemChanged(index)
 
                 /*  if (data.uservotecount == 0) {
 
