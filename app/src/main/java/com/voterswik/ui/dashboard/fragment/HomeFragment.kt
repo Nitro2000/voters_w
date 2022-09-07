@@ -178,10 +178,10 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
                 val index = videos.indexOf(data)
                 if (data.islike == 1) {
 
-                    likeStatus = "2"
-                    data.islike = 2
+                    likeStatus = "0"
+                    data.islike = 0
                     videos[index].likes = videos[index].likes!! - 1
-                } else if (data.islike == 2 || data.islike == 0) {
+                } else if (data.islike == 0) {
 
                     likeStatus = "1"
                     data.islike = 1
@@ -190,8 +190,8 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
                 callLikeApi(likeStatus, data.id.toString())
                 Log.e("@@", data.id.toString())
                 Log.e("likeStatus@@", likeStatus)
-                videos.removeAt(index)
-                videos.add(index, data)
+//                videos.removeAt(index)
+//                videos.add(index, data)
                 videosAdapter.notifyItemChanged(index)
 
             }
@@ -200,11 +200,7 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
                 var voteStatus = ""
 
                 val index = videos.indexOf(data)
-                if (data.uservotecount == 1) {
-                    voteStatus = "0"
-                    data.uservotecount = 0
-
-                } else if (data.uservotecount == 0) {
+                if (data.uservotecount == 0) {
 
                     voteStatus = "1"
                     data.uservotecount = 1
@@ -214,8 +210,8 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
                     "Bearer " + userPref.getToken().toString(),
                     data.id.toString(), voteStatus
                 )
-                videos.removeAt(index)
-                videos.add(index, data)
+//                videos.removeAt(index)
+//                videos.add(index, data)
                 videosAdapter.notifyItemChanged(index)
 
                 /*  if (data.uservotecount == 0) {
@@ -240,11 +236,13 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
             }
 
             R.id.ivShare -> {
+                val index = videos.indexOf(data)
+
                 val sendIntent = Intent()
                 sendIntent.action = Intent.ACTION_SEND
                 sendIntent.putExtra(
                     Intent.EXTRA_TEXT,
-                    "Hey check out my app at: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+                    "Hey check out my app at: " + videos[index].video
                 )
                 sendIntent.type = "text/plain"
                 startActivity(sendIntent)
