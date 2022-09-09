@@ -25,12 +25,9 @@ object CommonUtils {
 
              fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             ftTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
-            ftTransaction.replace(mContainer, fragment)
-            //ftTransaction.addToBackStack(null)
-        } else {
-            ftTransaction.replace(mContainer, fragment)
-            //ftTransaction.addToBackStack(null)
         }
+        ftTransaction.replace(mContainer, fragment)
+        ftTransaction.addToBackStack(null)
         ftTransaction.commit()
     }
 
@@ -127,4 +124,10 @@ object CommonUtils {
             return false
         }
     }
+
+    var isPaymentDone = false
+    var dataUserCount: Int = 0
+    var index: Int = 0
+    var dataId: Int = 0
+
 }

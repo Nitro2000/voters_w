@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.payment.PaymentPayPal">
+
+        <com.paypal.checkout.paymentbutton.PaymentButtonContainer
+            android:id="@+id/paymentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:pay_later_button_color="silver"
+            app:pay_later_button_enabled="true"
+            app:pay_later_button_shape="pill"
+            app:pay_later_button_size="medium"
+            app:paypal_button_color="silver"
+            app:paypal_button_enabled="true"
+            app:paypal_button_label="pay"
+            app:paypal_button_shape="rectangle"
+            app:paypal_button_size="large"
+            app:paypal_credit_button_color="black"
+            app:paypal_credit_button_enabled="true"
+            app:paypal_credit_button_shape="rounded"
+            app:paypal_credit_button_size="small" />
+
+    </LinearLayout>
+</layout>

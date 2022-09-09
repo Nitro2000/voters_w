@@ -19,6 +19,7 @@ import com.voterswik.adapter.VoteVideoListAdapter
 import com.voterswik.databinding.FragmentUserProfileBinding
 import com.voterswik.ui.BaseFragment
 import com.voterswik.ui.BaseModel
+import com.voterswik.ui.payment.PaymentPayPal
 import com.voterswik.utils.OnItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -104,6 +105,15 @@ class UserProfileFragment : BaseFragment(), View.OnClickListener, OnItemClickLis
 
         viewModel.videoListApi("Bearer " + userPref.getToken().toString(), "1")
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.paypaltesting.setOnClickListener {
+            val intent = Intent(requireContext(), PaymentPayPal::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {

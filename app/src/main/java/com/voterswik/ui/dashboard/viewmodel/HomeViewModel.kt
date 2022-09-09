@@ -1,6 +1,7 @@
 package com.voterswik.ui.dashboard.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +9,7 @@ import com.voterswik.network.MainRepository
 import com.voterswik.pref.UserPref
 import com.voterswik.model.DashboardResponseModel
 import com.voterswik.ui.profile.model.CommonDataResponse
+import com.voterswik.utils.CommonUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,6 +22,8 @@ class HomeViewModel @Inject constructor(private val mainRepository: MainReposito
     val voteResponse = MutableLiveData<CommonDataResponse>()
     val userViewPostResponse = MutableLiveData<CommonDataResponse>()
     val progressBarStatus = MutableLiveData<Boolean>()
+
+
 
     fun dashboardApi(
         token: String,
@@ -56,17 +60,26 @@ class HomeViewModel @Inject constructor(private val mainRepository: MainReposito
     fun voteApi(
         token: String, post_id: String, vote: String
     ) {
-        progressBarStatus.value = true
-        viewModelScope.launch {
-            val response = mainRepository.voteApi(token, post_id, vote)
-            if (response.isSuccessful) {
+        if (vote == "1") {
+            progressBarStatus.value = true
+            viewModelScope.launch {
+                val response = mainRepository.voteApi(token, post_id, vote)
+                if (response.isSuccessful) {
+                    voteResponse.postValue(response.body())
+                } else {
+                    Log.d("TAG", response.body().toString())
+                }
                 progressBarStatus.value = false
-                voteResponse.postValue(response.body())
-            } else {
-                progressBarStatus.value = false
-                Log.d("TAG", response.body().toString())
             }
+        } else {
+            // This is to reduce api call and still getting the correct message, adjust due to previous code
+            voteResponse.postValue(CommonDataResponse(
+                status = 1,
+                message = "You already given the vote",
+                data = "null"
+            ))
         }
+
     }
 
     fun userViewPostApi(

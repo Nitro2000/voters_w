@@ -1,5 +1,6 @@
 package com.voterswik.adapter
 
+import android.content.ComponentCallbacks
 import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
@@ -25,8 +26,7 @@ class VideosAdapter(
     var context: Context,
     private var videos: ArrayList<Data>,
     private var videoPreparedListener: OnVideoPreparedListener,
-    private var listener: OnItemClickListener<Data>
-
+    private var listener: OnItemClickListener<Data>,
 
 ) : RecyclerView.Adapter<VideosAdapter.VideoViewHolder>() {
 
@@ -35,52 +35,49 @@ class VideosAdapter(
         var context: Context,
         private var videoPreparedListener: OnVideoPreparedListener
     ) : RecyclerView.ViewHolder(binding.root) {
-
         private lateinit var exoPlayer: ExoPlayer
-        private lateinit var mediaSource: MediaSource
-
         fun setVideoPath(url: String) {
-
-            exoPlayer = ExoPlayer.Builder(context).build()
-            exoPlayer.addListener(object : Player.Listener {
-                override fun onPlayerError(error: PlaybackException) {
-                    super.onPlayerError(error)
-                    Toast.makeText(context, "Can't play this video", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-                    if (playbackState == Player.STATE_BUFFERING) {
-                        binding.progressBar.visibility = View.VISIBLE
-                    } else if (playbackState == Player.STATE_READY) {
-                        binding.progressBar.visibility = View.GONE
-                    }
-                }
-            })
-
-            binding.playerView.player = exoPlayer
-
+            exoPlayer = ExoPlayer.Builder(context).build().also {
+                binding.playerView.player = it
+            }
+            exoPlayer.addListener(playbackStateListener(binding))
             exoPlayer.seekTo(0)
             exoPlayer.repeatMode = Player.REPEAT_MODE_ONE
 
-            val dataSourceFactory = DefaultDataSource.Factory(context)
-
-            mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(
-                MediaItem.fromUri(Uri.parse(url))
-            )
-
-            exoPlayer.setMediaSource(mediaSource)
+//            val dataSourceFactory = DefaultDataSource.Factory(context)
+            val med = MediaItem.fromUri(Uri.parse(url))
+//            mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(
+//                MediaItem.fromUri(Uri.parse(url))
+//            )
+            exoPlayer.setMediaItem(med)
             exoPlayer.prepare()
+
 
             if (absoluteAdapterPosition == 0) {
                 exoPlayer.playWhenReady = true
                 exoPlayer.play()
             }
-
             videoPreparedListener.onVideoPrepared(ExoPlayerItem(exoPlayer, absoluteAdapterPosition))
-
-
         }
+
+        private fun playbackStateListener(binding: RowHomeBinding) = object : Player.Listener{
+            override fun onPlayerError(error: PlaybackException) {
+                super.onPlayerError(error)
+                Toast.makeText(context, "Can't play this video", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                super.onPlaybackStateChanged(playbackState)
+                if (playbackState == Player.STATE_BUFFERING) {
+                    binding.progressBar.visibility = View.VISIBLE
+                } else if (playbackState == Player.STATE_READY) {
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        }
+
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
         val view = RowHomeBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -93,6 +90,14 @@ class VideosAdapter(
 
         holder.binding.setVariable(BR.item, model)
         holder.binding.setVariable(BR.itemClickListener, listener)
+
+        if (model.uservotecount == 1) {
+            holder.binding.blurView.visibility = View.GONE
+        } else {
+
+            holder.binding.blurView.visibility = View.VISIBLE
+        }
+
 
         holder.binding.textVideoTitle.text = model.name
         model.video?.let {

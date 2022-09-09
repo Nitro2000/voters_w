@@ -79,4 +79,8 @@
     </string-array>
 
 
+    // Payment strings - R
+    <string name="pay_not_succ">Payment not successful</string>
+
+
 </resources>

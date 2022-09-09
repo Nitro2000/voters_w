@@ -1,5 +1,6 @@
 package com.voterswik.ui.dashboard.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -8,7 +9,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
@@ -20,7 +24,10 @@ import com.voterswik.model.ExoPlayerItem
 import com.voterswik.ui.BaseFragment
 import com.voterswik.ui.BaseModel
 import com.voterswik.ui.dashboard.viewmodel.HomeViewModel
+import com.voterswik.ui.payment.PaymentPayPal
+import com.voterswik.ui.payment.PaymentPayPalFragment
 import com.voterswik.ui.profile.model.CommonDataResponse
+import com.voterswik.utils.CommonUtils
 import com.voterswik.utils.OnItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import rx.android.BuildConfig
@@ -30,20 +37,44 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
 
     lateinit var binding: FragmentHomeBinding
 
+    private lateinit var mContext: Context
+    private lateinit var mActivity: FragmentActivity
     private val videos = ArrayList<Data>()
     private val exoPlayerItems = ArrayList<ExoPlayerItem>()
     private lateinit var videoList: java.util.ArrayList<BaseModel>
     private lateinit var videosAdapter: VideosAdapter
-    private val viewModel: HomeViewModel by viewModels()
+    val viewModel: HomeViewModel by activityViewModels()
     private var likeStatus = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("called", "onCreate")
+        mContext = requireContext()
+        mActivity = requireActivity()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d("called", "onAttach")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("called", "onDesView")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("called", "onDetach")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-
-        viewModel.progressBarStatus.observe(viewLifecycleOwner) {
+        Log.d("called", "onCreView")
+                viewModel.progressBarStatus.observe(viewLifecycleOwner) {
             if (it) {
                 showProgressDialog()
             } else {
@@ -51,7 +82,9 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
             }
         }
 
-        userPref.getToken()?.let { viewModel.dashboardApi("Bearer $it") }
+        userPref.getToken()?.let {
+            Log.d("auth token here", "this is: $it")
+            viewModel.dashboardApi("Bearer $it") }
 //
         videoList = ArrayList()
 
@@ -86,6 +119,9 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
                             val player = exoPlayerItems[previousIndex].exoPlayer
                             player.pause()
                             player.playWhenReady = false
+                            Log.d("player", "player before release $player")
+//                            player.release()
+                            Log.d("player", "player after release $player")
 
                         }
                         val newIndex = exoPlayerItems.indexOfFirst { it.position == position }
@@ -126,9 +162,29 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("called", "onViewCrea")
+        Log.d("will create again", "yes")
+
+    }
+
+    private fun updateAdapterItem() {
+        if (CommonUtils.isPaymentDone) {
+            CommonUtils.dataUserCount = 1
+            videos[CommonUtils.index].allvotescount = videos[CommonUtils.index].allvotescount!! + 1
+            videosAdapter.notifyItemChanged(CommonUtils.index)
+            viewModel.voteApi(
+                "Bearer " + userPref.getToken().toString(),
+                CommonUtils.dataId.toString(), "1"
+            )
+            CommonUtils.isPaymentDone = false
+        }
+    }
+
     override fun onPause() {
         super.onPause()
-
+        Log.d("called", "onPause")
         val index =
             exoPlayerItems.indexOfFirst { it.position == binding.viewPagerVideos.currentItem }
         if (index != -1) {
@@ -142,7 +198,8 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
 
     override fun onResume() {
         super.onResume()
-
+        Log.d("called", "onRes" )
+        updateAdapterItem()
         val index =
             exoPlayerItems.indexOfFirst { it.position == binding.viewPagerVideos.currentItem }
         if (index != -1) {
@@ -154,12 +211,14 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
 
     override fun onDestroy() {
         super.onDestroy()
+        Log.d("called", "onDest" )
         if (exoPlayerItems.isNotEmpty()) {
             for (item in exoPlayerItems) {
                 val player = item.exoPlayer
 
                 player.clearMediaItems()
                 player.stop()
+                player.release()
             }
         }
     }
@@ -197,42 +256,23 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
             }
 
             R.id.ivVote -> {
-                var voteStatus = ""
 
+                var voteStatus = "0"
                 val index = videos.indexOf(data)
-                if (data.uservotecount == 0) {
+                Log.d("countOfRishabhvot", "${mActivity.supportFragmentManager.backStackEntryCount}")
 
-                    voteStatus = "1"
-                    data.uservotecount = 1
-                    videos[index].allvotescount = videos[index].allvotescount!! + 1
+                if (data.uservotecount == 0) {
+                    CommonUtils.isPaymentDone = false
+//                    switchFragment()
+                    CommonUtils.dataUserCount = data.uservotecount!!
+                    CommonUtils.index = index
+                    CommonUtils.dataId = data.id!!
+                    switchActivity()
                 }
                 viewModel.voteApi(
                     "Bearer " + userPref.getToken().toString(),
                     data.id.toString(), voteStatus
                 )
-//                videos.removeAt(index)
-//                videos.add(index, data)
-                videosAdapter.notifyItemChanged(index)
-
-                /*  if (data.uservotecount == 0) {
-
-                      viewModel.voteApi(
-                          "Bearer " + userPref.getToken().toString(),
-                          data.id.toString(),
-                          "1"
-                      )
-
-                      val index = videos.indexOf(data)
-                      videos[index].allvotescount = videos[index].allvotescount!! + 1
-
-                      videosAdapter.notifyDataSetChanged()
-                      Toast.makeText(
-                          requireContext(),
-                          "Vote Submitted Successfully!!",
-                          Toast.LENGTH_SHORT
-                      ).show()
-
-                  }*/
             }
 
             R.id.ivShare -> {
@@ -248,12 +288,22 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
                 startActivity(sendIntent)
             }
             R.id.parentRow -> {
-
+                Toast.makeText(context, "constraint clicked", Toast.LENGTH_SHORT).show()
             }
             R.id.tvView -> {
                 // userPref.getToken()?.let { viewModel.userViewPostApi("Bearer $it", data.id.toString()) }
             }
 
         }
+    }
+
+    private fun switchActivity() {
+        val intentToPayment = Intent(requireContext(), PaymentPayPal::class.java)
+        intentToPayment.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(intentToPayment)
+    }
+
+    private fun switchFragment() {
+        CommonUtils.setFragment(PaymentPayPalFragment(), false, mActivity, R.id.frame_Container)
     }
 }
