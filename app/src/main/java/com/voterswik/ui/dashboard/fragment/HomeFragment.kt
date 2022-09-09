@@ -48,24 +48,8 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("called", "onCreate")
         mContext = requireContext()
         mActivity = requireActivity()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.d("called", "onAttach")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("called", "onDesView")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("called", "onDetach")
     }
 
     override fun onCreateView(
@@ -73,7 +57,7 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        Log.d("called", "onCreView")
+
                 viewModel.progressBarStatus.observe(viewLifecycleOwner) {
             if (it) {
                 showProgressDialog()
@@ -162,16 +146,9 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d("called", "onViewCrea")
-        Log.d("will create again", "yes")
-
-    }
-
     private fun updateAdapterItem() {
         if (CommonUtils.isPaymentDone) {
-            CommonUtils.dataUserCount = 1
+            videos[CommonUtils.index].uservotecount = 1
             videos[CommonUtils.index].allvotescount = videos[CommonUtils.index].allvotescount!! + 1
             videosAdapter.notifyItemChanged(CommonUtils.index)
             viewModel.voteApi(
@@ -264,15 +241,15 @@ class HomeFragment : BaseFragment(), OnItemClickListener<Data> {
                 if (data.uservotecount == 0) {
                     CommonUtils.isPaymentDone = false
 //                    switchFragment()
-                    CommonUtils.dataUserCount = data.uservotecount!!
                     CommonUtils.index = index
                     CommonUtils.dataId = data.id!!
                     switchActivity()
+                }  else {
+                    viewModel.voteApi(
+                        "Bearer " + userPref.getToken().toString(),
+                        data.id.toString(), voteStatus
+                    )
                 }
-                viewModel.voteApi(
-                    "Bearer " + userPref.getToken().toString(),
-                    data.id.toString(), voteStatus
-                )
             }
 
             R.id.ivShare -> {
